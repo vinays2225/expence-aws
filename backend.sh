@@ -65,7 +65,7 @@ validate $? "Installing dependencies"
 
 #/etc/systemd/system/backend.service
 
-sed -i "s/DOMAIN_NAME/$domain_name/g" backend.service
+sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/backend.service"
 cp "$scripts_dir/backend.service" /etc/systemd/system/backend.service
 validate $? "copy backend service"
 
