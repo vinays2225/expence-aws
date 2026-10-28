@@ -42,7 +42,7 @@ validate $? "removing nginx.conf"
 
 #/etc/nginx/nginx.conf
 
-sed -i "s/DOMAIN_NAME/$domain_name" "$scripts_dir/lb.conf"
+sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/lb.conf"
 cp "$scripts_dir/lb.conf" /etc/nginx/nginx.conf
 
 systemctl enable nginx
