@@ -25,6 +25,15 @@ timestamp(){
 mkdir -p $logs_folder
 echo -e "$(timestamp) [INFO] ==== Script started Execution =====" | tee -a $logs_file
 
+validate(){
+    if [ $1 -ne 0 ]; then
+        echo -e "$(timestamp) [ERROR] ${2}..${R}FAILED${N}" | tee -a $logs_file
+        exit 1
+    else
+        echo -e "$(timestamp) [INFO] ${2}..${G}SUCCESS${N}" | tee -a $logs_file
+    fi
+}
+
 dnf install nginx -y
 validate $? "Install nginx"
 
