@@ -69,12 +69,6 @@ sed -i "s/DOMAIN_NAME/$domain_name/g" "$scripts_dir/backend.service"
 cp "$scripts_dir/backend.service" /etc/systemd/system/backend.service
 validate $? "copy backend service"
 
-dnf install mysql -y
-validate $? "install mysql client"
-
-mysql -h mysql.$domain_name -u root -pExpenseApp@1 < /app/schema/backend.sql
-validate $? "load schema"
-
 systemctl daemon-reload
 validate $? "daemon reload"
 
@@ -83,3 +77,13 @@ validate $? "backend enable "
 
 systemctl start backend
 validate $? "start backend"
+
+dnf install mysql -y
+validate $? "install mysql client"
+
+mysql -h mysql.$domain_name -u root -pExpenseApp@1 < /app/schema/backend.sql
+validate $? "load schema"
+
+
+systemctl restart backend
+validate $? "re-start backend"
